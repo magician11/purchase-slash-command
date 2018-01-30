@@ -9,7 +9,11 @@ app.use(bodyParser.json());
 
 app.post('/purchase', async (req, res) => {
   console.log(req.body);
-  res.send('OK');
+  res.json({
+    text: 'Thanks for your purchase request!'
+  });
+
+  // send a message to the CEO.. asking them to authorise the purchase request
 });
 
 const PORT = 9647;
