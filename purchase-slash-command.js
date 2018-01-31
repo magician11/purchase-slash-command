@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { sendDM } = require('./modules/slack');
+const config = require('./config');
 
 const app = express();
 
@@ -8,12 +10,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/purchase', async (req, res) => {
-  console.log(req.body);
+  const { text, user_id } = req.body;
   res.json({
-    text: 'Thanks for your purchase request!'
+    text: `Thanks for your purchase request of *${
+      text
+    }*. We will message the CEO now for authorisation.`
   });
 
   // send a message to the CEO.. asking them to authorise the purchase request
+  sendDM(
+    config.ceoId,
+    `Hi! <@${user_id}> would like to order *${
+      text
+    }*. Do you authorise this purchase request?`
+  );
 });
 
 const PORT = 9647;
