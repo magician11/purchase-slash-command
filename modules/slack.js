@@ -1,7 +1,7 @@
 const axios = require('axios');
 const config = require('../config');
 
-const sendDM = async (userId, message) => {
+const sendDM = async (userId, message, attachments) => {
   try {
     const conversationResponse = await axios.post(
       'https://slack.com/api/conversations.open',
@@ -19,7 +19,8 @@ const sendDM = async (userId, message) => {
       'https://slack.com/api/chat.postMessage',
       {
         channel: conversationResponse.data.channel.id,
-        text: message
+        text: message,
+        attachments: JSON.stringify(attachments)
       },
       {
         headers: {
