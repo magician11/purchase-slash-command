@@ -1,14 +1,16 @@
 const { sendDM } = require('../modules/slack');
+const { savePurchaseRequest } = require('../modules/database');
 const config = require('../config');
 
 module.exports = app => {
   app.post('/purchase', async (req, res) => {
     const { text, user_id } = req.body;
     res.json({
-      text: `Thanks for your purchase request of *${
-        text
-      }*. We will message the CEO now for authorisation.`
+      text: `Thanks for your purchase request of *${text}*. We will message the CEO now for authorisation.`
     });
+
+    // save purchase request to database
+    await savePurchaseRequest(user_id, text);
 
     // send a message to the CEO.. asking them to authorise the purchase request
     sendDM(config.ceoId, `Hi! <@${user_id}> would like to order *${text}*.`, [
