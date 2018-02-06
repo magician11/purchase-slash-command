@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 require('./routes/purchase')(app);
+require('./routes/action')(app);
 
 const PORT = 9647;
 app.listen(PORT, () => {

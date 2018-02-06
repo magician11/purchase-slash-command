@@ -14,15 +14,16 @@ module.exports = app => {
     sendDM(config.ceoId, `Hi! <@${user_id}> would like to order *${text}*.`, [
       {
         text: 'Do you authorise this purchase request?',
+        callback_id: 'purchase_request',
         actions: [
           {
-            name: 'purchase_request',
+            name: 'auth_button',
             text: 'Yes I approve',
             type: 'button',
             value: 'approved'
           },
           {
-            name: 'purchase_request',
+            name: 'auth_button',
             text: 'No',
             type: 'button',
             value: 'declined'
