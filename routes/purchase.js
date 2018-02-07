@@ -20,13 +20,13 @@ module.exports = app => {
         callback_id: 'purchase_request',
         actions: [
           {
-            name: 'auth_button',
+            name: key,
             text: 'Yes I approve',
             type: 'button',
             value: 'approved'
           },
           {
-            name: 'auth_button',
+            name: key,
             text: 'No',
             type: 'button',
             value: 'declined'

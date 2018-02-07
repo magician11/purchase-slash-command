@@ -20,6 +20,13 @@ const savePurchaseRequest = (userId, item) => {
   return response.key;
 };
 
+const readPurchaseRequest = async key => {
+  const ref = db.ref('/');
+  const snapshot = await ref.child(key).once('value');
+  return snapshot.val();
+};
+
 module.exports = {
-  savePurchaseRequest
+  savePurchaseRequest,
+  readPurchaseRequest
 };
