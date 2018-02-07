@@ -10,7 +10,8 @@ module.exports = app => {
     });
 
     // save purchase request to database
-    await savePurchaseRequest(user_id, text);
+    const key = savePurchaseRequest(user_id, text);
+    console.log(key);
 
     // send a message to the CEO.. asking them to authorise the purchase request
     sendDM(config.ceoId, `Hi! <@${user_id}> would like to order *${text}*.`, [

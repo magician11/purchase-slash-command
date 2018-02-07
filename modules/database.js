@@ -10,12 +10,14 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const savePurchaseRequest = async (userId, item) => {
-  var ref = db.ref('/');
-  ref.push({
+const savePurchaseRequest = (userId, item) => {
+  const ref = db.ref('/');
+  const response = ref.push({
     userId,
     item
   });
+
+  return response.key;
 };
 
 module.exports = {
