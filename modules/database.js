@@ -33,8 +33,14 @@ const readPurchaseRequest = async key => {
   return snapshot.val();
 };
 
+const readAllPurchaseRequests = async key => {
+  const snapshot = await ref.once('value');
+  return snapshot.val();
+};
+
 module.exports = {
   savePurchaseRequest,
   readPurchaseRequest,
-  recordPurchaseRequestDecision
+  recordPurchaseRequestDecision,
+  readAllPurchaseRequests
 };
