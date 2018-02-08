@@ -28,7 +28,7 @@ module.exports = app => {
             name: key,
             text: 'No',
             type: 'button',
-            value: 'declined'
+            value: 'denied'
           }
         ]
       }

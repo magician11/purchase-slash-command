@@ -1,5 +1,8 @@
 const { sendDM } = require('../modules/slack');
-const { readPurchaseRequest } = require('../modules/database');
+const {
+  readPurchaseRequest,
+  recordPurchaseRequestDecision
+} = require('../modules/database');
 
 module.exports = app => {
   app.post('/action', async (req, res) => {
@@ -19,6 +22,12 @@ module.exports = app => {
         }
       ]
     });
+
+    // record decision of CEO in database
+    recordPurchaseRequestDecision(
+      databaseKey,
+      interactiveMessage.actions[0].value
+    );
 
     // read purchase request from database using key
     const purchaseRequest = await readPurchaseRequest(databaseKey);

@@ -10,9 +10,9 @@ admin.initializeApp({
 });
 
 const db = admin.database();
+const ref = db.ref('/');
 
 const savePurchaseRequest = (userId, item) => {
-  const ref = db.ref('/');
   const response = ref.push({
     userId,
     item,
@@ -22,13 +22,19 @@ const savePurchaseRequest = (userId, item) => {
   return response.key;
 };
 
+const recordPurchaseRequestDecision = (key, decision) => {
+  ref.child(key).update({
+    decision
+  });
+};
+
 const readPurchaseRequest = async key => {
-  const ref = db.ref('/');
   const snapshot = await ref.child(key).once('value');
   return snapshot.val();
 };
 
 module.exports = {
   savePurchaseRequest,
-  readPurchaseRequest
+  readPurchaseRequest,
+  recordPurchaseRequestDecision
 };
