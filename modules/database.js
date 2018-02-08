@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+const moment = require('moment');
 const config = require('../config');
 
 const serviceAccount = require(`../keys/${config.firebasePrivateKey}`);
@@ -14,7 +15,8 @@ const savePurchaseRequest = (userId, item) => {
   const ref = db.ref('/');
   const response = ref.push({
     userId,
-    item
+    item,
+    timestamp: moment().valueOf()
   });
 
   return response.key;
