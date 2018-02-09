@@ -1,5 +1,5 @@
 /*
-This script checks each purchase request every x minutes.
+This script checks each purchase request every 11 seconds.
 
 If a decision on the purchase request has not been made
 AND
@@ -20,7 +20,7 @@ const checkOnPurchaseRequests = async () => {
   for (let key of Object.keys(purchaseRequests)) {
     const { timestamp, decision, item, userId } = purchaseRequests[key];
 
-    if (!decision && moment().diff(timestamp, 'minutes') > 94) {
+    if (!decision && moment().diff(timestamp, 'minutes') > 1) {
       purchaseRequestReminders.push({
         item,
         userId
@@ -28,15 +28,23 @@ const checkOnPurchaseRequests = async () => {
     }
   }
 
-  sendDM(
-    config.ceoId,
-    'Hi! Here are purchase requests that still need a decision from you.',
-    purchaseRequestReminders.map(purchaseRequest => ({
-      text: `*${purchaseRequest.item}* requested by <@${
-        purchaseRequest.userId
-      }>`
-    }))
+  console.log(
+    `Total reminders to send to CEO are ${purchaseRequestReminders.length}`
   );
+
+  if (purchaseRequestReminders.length > 0) {
+    sendDM(
+      config.ceoId,
+      'Hi! Here are purchase requests that still need a decision from you.',
+      purchaseRequestReminders.map(purchaseRequest => ({
+        text: `*${purchaseRequest.item}* requested by <@${
+          purchaseRequest.userId
+        }>`
+      }))
+    );
+  }
 };
 
 checkOnPurchaseRequests();
+
+setInterval(checkOnPurchaseRequests, 11000);
