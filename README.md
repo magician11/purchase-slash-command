@@ -1,6 +1,6 @@
 # Purchase Slash Command
 
-This is the code for the tutorial on _How to create a Slack bot to automate tasks for you_.
+This is the code for the tutorial on [How to create a Slack bot to automate tasks for you](https://www.udemy.com/how-to-create-a-slack-bot-to-automate-tasks-for-you/).
 
 The key learnings of this course include:
 
@@ -10,3 +10,7 @@ The key learnings of this course include:
 * how to send direct messages to users in Slack from a Slack bot
 * how to persist state between messages using Firebase
 * how to start implementing the logic of a personal assistant to remind users of actions they need to take
+
+## Misc
+
+One of the students of this course, re-implemented this code using .NET. You can find that code [here](https://github.com/peelmicro/purchase-slack-command-dotnet).
